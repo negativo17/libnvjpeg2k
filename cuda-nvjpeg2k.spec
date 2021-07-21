@@ -8,6 +8,7 @@ Release:        1%{?dist}
 Summary:        NVIDIA JPEG 2K decoder (nvJPEG2000)
 License:        NVIDIA EULA
 URL:            https://developer.nvidia.com/nvjpeg
+ExclusiveArch:  x86_64
 
 # https://developer.nvidia.com/nvjpeg2000/downloads
 Source0:        libnvjpeg_2k-linux-x86_64-0.3.0.23.tar.gz
