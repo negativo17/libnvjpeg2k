@@ -3,7 +3,7 @@
 %global         _missing_build_ids_terminate_build 0
 
 Name:           cuda-nvjpeg2k
-Version:        0.3.0.23
+Version:        0.4.0.24
 Release:        1%{?dist}
 Summary:        NVIDIA JPEG 2K decoder (nvJPEG2000)
 License:        NVIDIA EULA
@@ -11,7 +11,7 @@ URL:            https://developer.nvidia.com/nvjpeg
 ExclusiveArch:  x86_64
 
 # https://developer.nvidia.com/nvjpeg2000/downloads
-Source0:        libnvjpeg_2k-linux-x86_64-0.3.0.23.tar.gz
+Source0:        libnvjpeg_2k-linux-x86_64-%{version}-archive.tar.xz
 Source1:        nvjpeg2k.pc
 
 Requires(post): ldconfig
@@ -43,7 +43,7 @@ Requires:       %{name}-devel%{_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
 This package contains static libraries for NVIDIA JPEG 2K decoder (nvJPEG2000).
 
 %prep
-%autosetup -n libnvjpeg_2k
+%autosetup -n libnvjpeg_2k-linux-x86_64-0.4.0.24-archive
 
 %build
 # Nothing to build
@@ -53,7 +53,7 @@ mkdir -p %{buildroot}/%{_libdir}/pkgconfig/
 mkdir -p %{buildroot}/%{_includedir}/cuda/
 
 # Libraries
-install -pm 755 lib64/* %{buildroot}/%{_libdir}/
+install -pm 755 lib/* %{buildroot}/%{_libdir}/
 
 # Headers
 install -pm 644 include/* %{buildroot}/%{_includedir}/cuda/
@@ -71,7 +71,7 @@ sed -i \
 %ldconfig_scriptlets
 
 %files
-%license LICENSE.txt
+%license LICENSE
 %{_libdir}/libnvjpeg2k.so.*
 
 %files static
@@ -84,5 +84,8 @@ sed -i \
 %{_libdir}/pkgconfig/nvjpeg2k.pc
 
 %changelog
+* Tue Nov 02 2021 Simone Caronni <negativo17@gmail.com> - 0.4.0.24-1
+- Update to 0.4.0.24.
+
 * Wed Jul 21 2021 Simone Caronni <negativo17@gmail.com> - 0.3.0.23-1
 - First build.
