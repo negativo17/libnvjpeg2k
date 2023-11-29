@@ -3,16 +3,17 @@
 %global         _missing_build_ids_terminate_build 0
 
 Name:           libnvjpeg2k
-Version:        0.7.0.31
+Version:        0.7.5.32
 Release:        1%{?dist}
 Summary:        NVIDIA JPEG 2K decoder (nvJPEG2000)
 License:        NVIDIA EULA
 URL:            https://developer.nvidia.com/nvjpeg
-ExclusiveArch:  x86_64
+ExclusiveArch:  aarch64 x86_64
 
 # https://developer.nvidia.com/nvjpeg2000/downloads
-Source0:        https://developer.download.nvidia.com/compute/libnvjpeg-2k/redist/libnvjpeg_2k/linux-x86_64/libnvjpeg_2k-linux-x86_64-%{version}-archive.tar.xz
-Source1:        nvjpeg2k.pc
+Source0:        https://developer.download.nvidia.com/compute/nvjpeg2000/redist/libnvjpeg_2k/linux-x86_64/libnvjpeg_2k-linux-x86_64-%{version}-archive.tar.xz
+Source1:        https://developer.download.nvidia.com/compute/nvjpeg2000/redist/libnvjpeg_2k/linux-sbsa/libnvjpeg_2k-linux-sbsa-%{version}-archive.tar.xz
+Source2:        nvjpeg2k.pc
 
 Obsoletes:      cuda-nvjpeg2k < %{?epoch:%{epoch}:}%{version}-%{release}
 Provides:       cuda-nvjpeg2k = %{?epoch:%{epoch}:}%{version}-%{release}
@@ -44,7 +45,13 @@ Requires:       %{name}-devel%{_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
 This package contains static libraries for NVIDIA JPEG 2K decoder (nvJPEG2000).
 
 %prep
-%autosetup -n libnvjpeg_2k-linux-x86_64-%{version}-archive
+%ifarch x86_64
+%setup -q -n libnvjpeg_2k-linux-x86_64-%{version}-archive
+%endif
+
+%ifarch aarch64
+%setup -q -T -b 1 -n libnvjpeg_2k-linux-sbsa-%{version}-archive
+%endif
 
 %build
 # Nothing to build
@@ -59,7 +66,7 @@ chmod 755 %{buildroot}/%{_libdir}/*.so*
 cp -a include/* %{buildroot}/%{_includedir}/
 chmod 644 %{buildroot}/%{_includedir}/*
 
-install -pm 644 %{SOURCE1} %{buildroot}/%{_libdir}/pkgconfig/
+install -pm 644 %{SOURCE2} %{buildroot}/%{_libdir}/pkgconfig/
 
 # Set proper variables
 sed -i \
@@ -84,6 +91,9 @@ sed -i \
 %{_libdir}/pkgconfig/nvjpeg2k.pc
 
 %changelog
+* Wed Nov 29 2023 Simone Caronni <negativo17@gmail.com> - 0.7.5.32-1
+- Add aarch64 and update to 0.7.5.32.
+
 * Tue Apr 11 2023 Simone Caronni <negativo17@gmail.com> - 0.7.0.31-1
 - Update to 0.7.0.31.
 
