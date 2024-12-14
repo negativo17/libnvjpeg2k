@@ -3,7 +3,7 @@
 %global         _missing_build_ids_terminate_build 0
 
 Name:           libnvjpeg2k
-Version:        0.8.0.38
+Version:        0.8.1.40
 Release:        1%{?dist}
 Summary:        NVIDIA JPEG 2K decoder (nvJPEG2000)
 License:        NVIDIA EULA
@@ -91,6 +91,9 @@ sed -i \
 %{_libdir}/pkgconfig/nvjpeg2k.pc
 
 %changelog
+* Sat Dec 14 2024 Simone Caronni <negativo17@gmail.com> - 0.8.1.40-1
+- Update to 0.8.1.40.
+
 * Thu Jul 11 2024 Simone Caronni <negativo17@gmail.com> - 0.8.0.38-1
 - Update to 0.8.0.38.
 
