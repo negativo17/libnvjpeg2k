@@ -75,8 +75,6 @@ sed -i \
     -e 's|INCLUDE_DIR|%{_includedir}/cuda|g' \
     %{buildroot}/%{_libdir}/pkgconfig/*.pc
 
-%{?ldconfig_scriptlets}
-
 %files
 %license LICENSE
 %{_libdir}/libnvjpeg2k.so.*
