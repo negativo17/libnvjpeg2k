@@ -4,7 +4,7 @@
 %global         cuda_version 13
 
 Name:           libnvjpeg2k
-Version:        0.9.1.47
+Version:        0.11.0.51
 Release:        1%{?dist}
 Summary:        NVIDIA JPEG 2K decoder (nvJPEG2000)
 License:        NVIDIA EULA
@@ -90,6 +90,9 @@ sed -i \
 %{_libdir}/pkgconfig/nvjpeg2k.pc
 
 %changelog
+* Fri Aug 07 2026 Simone Caronni <negativo17@gmail.com> - 0.11.0.51-1
+- Update to 0.11.0.51.
+
 * Tue Feb 03 2026 Simone Caronni <negativo17@gmail.com> - 0.9.1.47-1
 - Update to 0.9.1.47.
 
